@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Password Protected Page</title>
+    <style>
+        body {
+            color: #be4a4a;
+            font-family: 'Kingthings Trypewriter 2', Calibri, Tahoma,
+                sans-serif;
+            font-size: 1.33rem;
+            margin: 0;
+            max-height: 100%;
+            text-align: center;
+        }
+
+        .password-form {
+            margin-top: 100px;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to the Password Protected Page!</h1>
+
+    <div id="passwordFormContainer" class="password-form">
+        <form id="passwordForm" name="passwordForm" onsubmit="return validatePassword()" method="post">
+            <label for="password">Enter the password:</label>
+            <input type="password" id="password" name="password" required>
+            <br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div id="contentContainer" class="hidden">
+        <h2>Dummy Content</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt justo sit amet massa dapibus iaculis a
+            at nibh.</p>
+    </div>
+
+    <script>
+        function validatePassword() {
+            var encodedPassword = "cGFzc3dvcmQ="; // Base64 encoded password: "password"
+            var inputPassword = document.getElementById("password").value;
+
+            if (btoa(inputPassword) === encodedPassword) {
+                document.getElementById("passwordFormContainer").classList.add("hidden");
+                document.getElementById("contentContainer").classList.remove("hidden");
+                return false; // To prevent form submission
+            } else {
+                alert("Incorrect password. Please try again.");
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>
